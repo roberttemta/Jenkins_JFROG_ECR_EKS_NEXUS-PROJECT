@@ -8,3 +8,11 @@ variable "ami_name" {
 variable "region" {
   default = "us-east-1"
 }
+
+variable "ami-username" {
+  default = ""
+}
+
+variable "ami-password" {
+  default = ""
+}

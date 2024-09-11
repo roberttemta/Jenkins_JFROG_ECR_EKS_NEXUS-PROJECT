@@ -1,7 +1,7 @@
 # configured aws provider with proper credentials
 provider "aws" {
-  region    = var.aws_region
-  profile   = var.profile
+  region  = var.aws_region
+  profile = var.profile
 }
 
 # create default vpc if one does not exit
@@ -14,7 +14,7 @@ data "aws_availability_zones" "available_zones" {}
 # create default subnet if one does not exit
 resource "aws_default_subnet" "default_az1" {
   availability_zone = data.aws_availability_zones.available_zones.names[0]
-  tags   = {
+  tags = {
     Name = "utrains default subnet"
   }
 }
@@ -27,29 +27,29 @@ resource "aws_security_group" "jenkins_ec2_security_group" {
 
   # allow access on port 8080 for Jenkins Server
   ingress {
-    description      = "http proxy access"
-    from_port        = 8080
-    to_port          = 8080
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
+    description = "http proxy access"
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
   # allow access on port 22 ssh connection
   ingress {
-    description      = "ssh access"
-    from_port        = 22
-    to_port          = 22
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
+    description = "ssh access"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = -1
-    cidr_blocks      = ["0.0.0.0/0"]
+    from_port   = 0
+    to_port     = 0
+    protocol    = -1
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags   = {
+  tags = {
     Name = "utrains jenkins server security group"
   }
 }
@@ -61,7 +61,7 @@ resource "aws_instance" "ec2_instance" {
   subnet_id              = aws_default_subnet.default_az1.id
   vpc_security_group_ids = [aws_security_group.jenkins_ec2_security_group.id]
   key_name               = aws_key_pair.jenkins_key.key_name
-  user_data            = file("installjenkins.sh")
+  user_data              = file("installjenkins.sh")
 
   # Attach role to Ec2 instance
   iam_instance_profile = aws_iam_instance_profile.jenkins_instance_profile.name
@@ -86,15 +86,18 @@ resource "aws_instance" "ec2_instance" {
 
 /*
 module "ami" {
-  source = "../ami-creation"
+  source    = "../ami-creation"
   source_id = aws_instance.ec2_instance.id
-  ami_name = "jenkins_ami"
+  ami_name  = "jenkins_ami_10092024"
+  ami-username = "devops"
+  ami-password = "devops"
+  
 }
 
 output "jenkins_ami_id" {
   value = module.ami.ami_id
 }
-*/
 
+*/
 ## terraform state list 
 ### terraform state rm module.ami.aws_ami_from_instance.ami

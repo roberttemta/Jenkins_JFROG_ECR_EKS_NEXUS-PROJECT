@@ -1,3 +1,4 @@
+
 provider "aws" {
   region    = var.region
   profile   = "default"
@@ -9,6 +10,12 @@ resource "aws_ami_from_instance" "ami" {
 
   lifecycle {
     prevent_destroy = true
+  }
+
+  tags = {
+    "Username" = var.ami-username
+    "password" = var.ami-password
+    # Name = var.ami_name
   }
 }
 

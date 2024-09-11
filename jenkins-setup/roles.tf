@@ -11,7 +11,7 @@ resource "aws_iam_role" "jenkins_admin_role" {
         },
         Action = "sts:AssumeRole"
       },
-       {
+      {
         Effect = "Allow",
         Principal = {
           Service = "ecr.amazonaws.com"
