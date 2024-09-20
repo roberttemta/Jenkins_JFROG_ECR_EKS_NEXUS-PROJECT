@@ -63,15 +63,15 @@ resource "aws_instance" "JfrogInstance" {
 module "ami" {
   source = "../ami-creation"
   source_id = aws_instance.JfrogInstance.id
-  ami_name = "jfrog_ami"
+  ami_name = "jfrog_ami_09202024_3pm"
 }
 
 output "jfrog_ami_id" {
   value = module.ami.ami_id
 }
-
+*/
 
 ## terraform state list 
 ### terraform state rm module.ami.aws_ami_from_instance.ami
-*/
+
 

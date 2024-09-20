@@ -74,8 +74,11 @@ resource "aws_instance" "uat_server" {
 module "jenkins-ami" {
   source = "../ami-creation"
   source_id = aws_instance.jenkins_ec2_instance.id
-  ami_name = "Jenkins_AMI_091924_1211AM"
+  ami_name = "Jenkins_AMI_092024_315M"
 
+}
+output "jenkins_ami_id" {
+  value = module.jenkins-ami.ami_id
 }
 
 
@@ -88,9 +91,7 @@ module "jfrog-ami" {
 output "jfrog_ami_id" {
   value = module.jfrog-ami.ami_id
 }
-output "jenkins_ami_id" {
-  value = module.jenkins-ami.ami_id
-}
+
 */
 
 
