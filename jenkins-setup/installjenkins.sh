@@ -20,9 +20,10 @@ sudo yum install git -y
 yum install unzip -y
 
 ## Install Java 17:
-#sudo amazon-linux-extras install java-openjdk11 -y
+# sudo amazon-linux-extras install java-openjdk11 -y
 
 sudo yum install java-17* -y
+
 ## Install Jenkins then Enable the Jenkins service to start at boot :
 sudo yum install jenkins -y
 sudo systemctl enable jenkins
