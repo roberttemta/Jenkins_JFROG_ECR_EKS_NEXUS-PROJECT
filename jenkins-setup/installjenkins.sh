@@ -15,6 +15,17 @@ sudo yum upgrade -y
 ## Install aws cli ==> jenkins to run aws commands.
 sudo yum install aws-cli -y
 
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+
+unzip awscliv2.zip
+
+sudo ./aws/install --update 
+
+sudo reboot # If you already have a server up and running 
+
+
+
+
 ## install Git  ==> jenkins to run git commands
 sudo yum install git -y
 yum install unzip -y

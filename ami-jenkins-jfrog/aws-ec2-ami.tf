@@ -74,7 +74,7 @@ resource "aws_instance" "uat_server" {
 module "jenkins-ami" {
   source = "../ami-creation"
   source_id = aws_instance.jenkins_ec2_instance.id
-  ami_name = "Jenkins_AMI_092024_315M"
+  ami_name = "Jenkins_AMI_092224_822M"
 
 }
 output "jenkins_ami_id" {
@@ -85,14 +85,14 @@ output "jenkins_ami_id" {
 module "jfrog-ami" {
   source = "../ami-creation"
   source_id = aws_instance.jfrog_ec2_instance[0].id
-  ami_name = "jfrog_ami-2"
+  ami_name = "jfrog_ami_092224_822M"
 
 }
 output "jfrog_ami_id" {
   value = module.jfrog-ami.ami_id
 }
-
 */
+
 
 
 ## terraform state list 

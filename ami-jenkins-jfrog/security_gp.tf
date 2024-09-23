@@ -40,7 +40,9 @@ resource "aws_security_group" "jfrog_security_gp" {
   name        = var.jfrog_sg_name
   description = "allow access on ports 8081 and 22 for jfrog and ssh"
   vpc_id      = aws_default_vpc.default_vpc.id
+
   # allow access on port 8081 for jfrog Server
+
   ingress {
     description = "httpd access port"
     from_port   = 8081
@@ -48,7 +50,19 @@ resource "aws_security_group" "jfrog_security_gp" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  # allow access on port 9000 for jfrog Server
+
+  ingress {
+    description = "SonarQube access port"
+    from_port   = 9000
+    to_port     = 9000
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  
   # allow access on port 22 ssh connection
+
   ingress {
     description = "ssh access"
     from_port   = 22

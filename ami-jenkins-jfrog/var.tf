@@ -40,7 +40,7 @@ variable "uat_server" {
 }
 variable "jfrog_server" {
   description = "if nexus server can be created"
-  default     = false
+  default     = true
   type        = bool
 }
 
