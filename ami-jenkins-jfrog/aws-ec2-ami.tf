@@ -15,7 +15,7 @@ resource "aws_instance" "jenkins_ec2_instance" {
 
   tags = {
     Name  = "jenkins-server"
-    Owner = "Hermann90"
+    Owner = "Robert_T"
   }
 }
 
@@ -27,6 +27,11 @@ resource "aws_instance" "jfrog_ec2_instance" {
   instance_type          = "t2.medium"
   vpc_security_group_ids = [aws_security_group.jfrog_security_gp.id]
   key_name               = aws_key_pair.instance_key.key_name
+
+  root_block_device {
+    volume_size = 30
+    volume_type = "gp2"
+  }
   /* user_data = <<-EOF
     #!/bin/bash
     /home/ec2-user/jfrog/bin/jfrog start
@@ -34,7 +39,7 @@ resource "aws_instance" "jfrog_ec2_instance" {
 */
   tags = {
     Name  = "jfrog-server"
-    Owner = "Hermann90"
+    Owner = "Robert_T"
   }
 
 }
@@ -48,7 +53,7 @@ resource "aws_instance" "qa_server" {
   user_data              = file("qa_uat.sh")
   tags = {
     Name  = "qa-server"
-    Owner = "Hermann90"
+    Owner = "Robert_T"
   }
 
 }
@@ -63,7 +68,7 @@ resource "aws_instance" "uat_server" {
   user_data              = file("qa_uat.sh")
   tags = {
     Name  = "uat-server"
-    Owner = "Hermann90"
+    Owner = "Robert_T"
   }
 
 }
@@ -71,10 +76,11 @@ resource "aws_instance" "uat_server" {
 # Code to create Ami for our Jenkins server
 
 /*
+
 module "jenkins-ami" {
   source = "../ami-creation"
   source_id = aws_instance.jenkins_ec2_instance.id
-  ami_name = "Jenkins_AMI_092224_822M"
+  ami_name = "Jenkins_AMI_093024_912AM"
 
 }
 output "jenkins_ami_id" {
@@ -85,7 +91,7 @@ output "jenkins_ami_id" {
 module "jfrog-ami" {
   source = "../ami-creation"
   source_id = aws_instance.jfrog_ec2_instance[0].id
-  ami_name = "jfrog_ami_092224_822M"
+  ami_name = "jfrog_ami_093024_912AM"
 
 }
 output "jfrog_ami_id" {
